@@ -1,7 +1,9 @@
-# docker-compose-lnmp
-lnmp环境搭建
-
-## 目录结构
+# 基于docker构建lnmp+redis
+## 版本
+* nginx:1.19.10
+* php:7.2
+* mysql:5.7
+* redis:6.0.12
 ```
 ├── README.md
 ├── docker-compose.yml
@@ -27,9 +29,3 @@ lnmp环境搭建
 └── www
     └── index.php
 ```
-
-## 版本
-nginx:1.19.10
-php:7.2
-mysql:5.7
-redis:6.0.12
