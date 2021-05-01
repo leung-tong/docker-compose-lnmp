@@ -1,0 +1,5 @@
+FROM redis:6.0.12-alpine
+
+VOLUME /data
+
+EXPOSE 6379

@@ -1,0 +1,9 @@
+FROM mysql:5.7
+
+RUN chown -R mysql:root /var/lib/mysql/
+
+ENV MYSQL_ROOT_PASSWORD=root123
+
+CMD ["mysqld"]
+
+EXPOSE 3306

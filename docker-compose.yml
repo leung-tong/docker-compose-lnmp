@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  ### Nginx Server Container ##################################
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: dockerfile-nginx
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - ./nginx/sites:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/log:/var/log/nginx
+      - ./www:/var/www
+    links:
+      - php-fpm
+      - mysql
+
+  ## PHP-FPM Server Container ##################################
+  php-fpm:
+    container_name: php-fpm
+    build:
+      context: .
+      dockerfile: dockerfile-php-fpm
+    volumes:
+      - ./www:/var/www
+      - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+    expose:
+      - "9000"
+    links:
+      - redis
+
+  ### Redis Container #########################################
+  redis:
+    container_name: redis
+    build:
+      context: .
+      dockerfile: dockerfile-redis
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf:/usr/local/etc/redis/redis.conf
+      - ./redis/logs:/var/log/redis
+    ports:
+      - "6379:6379"
+    restart: always
+    command: redis-server /usr/local/etc/redis/redis.conf --appendonly yes
+
+  ### MySQL Container #########################################
+  mysql:
+    container_name: mysql
+    build:
+      context: .
+      dockerfile: dockerfile-mysql
+      args:
+        - MYSQL_ROOT_PASSWORD=root123
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    restart: always
+    ports:
+      - "3306:3306"
