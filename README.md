@@ -2,6 +2,7 @@
 lnmp环境搭建
 
 ## 目录结构
+```
 ├── README.md
 ├── docker-compose.yml
 ├── dockerfile-mysql
@@ -25,6 +26,7 @@ lnmp环境搭建
 │   └── logs
 └── www
     └── index.php
+```
 
 ## 版本
 nginx:1.19.10
