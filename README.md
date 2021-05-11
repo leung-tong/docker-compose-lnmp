@@ -27,6 +27,6 @@
 │   ├── data
 │   └── logs
 └── www
-    └── http
+    └── html
         └── index.php
 ```
