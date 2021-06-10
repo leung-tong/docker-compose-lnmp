@@ -15,7 +15,7 @@ services:
       - ./nginx/sites:/etc/nginx/conf.d
       - ./nginx/ssl:/etc/nginx/ssl
       - ./nginx/log:/var/log/nginx
-      - ./www/html:/var/www/html
+      - ./www:/var/www/html
     links:
       - php-fpm
       - mysql
@@ -27,7 +27,7 @@ services:
       context: .
       dockerfile: dockerfile-php-fpm
     volumes:
-      - ./www/html:/var/www/html
+      - ./www:/var/www/html
       - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
     expose:
       - "9000"
